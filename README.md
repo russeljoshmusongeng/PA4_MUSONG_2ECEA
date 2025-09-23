@@ -17,6 +17,7 @@ df[score_cols] = df[score_cols].apply(pd.to_numeric, errors="coerce")
 df["Average"] = df[score_cols].mean(axis=1)
 
 ````
+I loaded the dataset board2.xlsx into a DataFrame and made sure the subject scores were numeric using .apply(pd.to_numeric). I then created a new column Average using .mean(axis=1), which computes the row-wise average. This is much easier than writing loops.
 
 ### What each line does
 
@@ -32,6 +33,7 @@ df["Average"] = df[score_cols].mean(axis=1)
 
 ````mean(axis=1):```` computes row-wise average across the 4 subjects and stores it as a new column Average.
 
+
 ### Instru DataFrame
 
 ````
@@ -41,6 +43,7 @@ Instru = df.query(
 Instru.to_csv("Instru.csv", index=False)
 
 ````
+I created two special DataFrames. The Instru DataFrame filtered Instrumentation students from Luzon with Electronics > 70, and saved only their Name, GEAS, and Electronics.
 
 ### What each line does
 
@@ -58,6 +61,7 @@ Mindy = df.query(
 )[["Name", "Track", "Electronics", "Average"]]
 Mindy.to_csv("Mindy.csv", index=False)
 ````
+The Mindy DataFrame filtered female students from Mindanao with an Average ≥ 55, keeping their Name, Track, Electronics, and Average. I used .query() because it makes conditions more readable than combining multiple Boolean checks.
 
 ### What each line does
 
@@ -80,6 +84,8 @@ plt.ylabel("Average"); plt.show()
 df.groupby("Hometown")["Average"].mean().plot(kind="bar", title="Average by Hometown")
 plt.ylabel("Average"); plt.show()
 ````
+For visualization, I grouped the data by Track, Gender, and Hometown using .groupby() and plotted bar charts of their average scores. This gave a clear view of differences between groups without calculating manually.
+
 ### What each line does
 
 ```` groupby("Track"): ```` groups rows by Track.
